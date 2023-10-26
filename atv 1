@@ -1,0 +1,201 @@
+Função contar_ocorrencias_elemento(vetor:vetor[1..n] de inteiro, elemento:inteiro):inteiro
+Var
+    contador, i:inteiro
+
+    contador <- 0
+    Para i de 1 ate n faca
+        Se vetor[i] = elemento entao
+            contador <- contador + 1
+        FimSe
+    FimPara
+
+    Retorne contador
+FimFunção
+
+Função contar_ocorrencias_positivos(vetor:vetor[1..n] de inteiro):inteiro
+Var
+    contador, i:inteiro
+
+    contador <- 0
+    Para i de 1 ate n faca
+        Se vetor[i] > 0 entao
+            contador <- contador + 1
+        FimSe
+    FimPara
+
+    Retorne contador
+FimFunção
+
+Função contar_ocorrencias_quadrados_perfeitos(vetor:vetor[1..n] de inteiro):inteiro
+Var
+    contador, i:inteiro
+
+    contador <- 0
+    Para i de 1 ate n faca
+        Se vetor[i] >= 0 e Inteiro(RaizQuadrada(vetor[i])) ^ 2 = vetor[i] entao
+            contador <- contador + 1
+        FimSe
+    FimPara
+
+    Retorne contador
+FimFunção
+
+Função is_primo(numero:inteiro):logico
+Var
+    i:inteiro
+
+    Se numero < 2 entao
+        Retorne Falso
+    FimSe
+
+    Para i de 2 ate Inteiro(RaizQuadrada(numero)) faca
+        Se numero % i = 0 entao
+            Retorne Falso
+        FimSe
+    FimPara
+
+    Retorne Verdadeiro
+FimFunção
+
+Função contar_ocorrencias_primos(vetor:vetor[1..n] de inteiro):inteiro
+Var
+    contador, i:inteiro
+
+    contador <- 0
+    Para i de 1 ate n faca
+        Se is_primo(vetor[i]) entao
+            contador <- contador + 1
+        FimSe
+    FimPara
+
+    Retorne contador
+FimFunção
+
+Procedimento inserir_elemento_ordenado(vetor:vetor[1..n] de inteiro, elemento:inteiro)
+Var
+    i:inteiro
+
+    i <- n
+    Enquanto i > 0 e vetor[i] > elemento faca
+        vetor[i + 1] <- vetor[i]
+        i <- i - 1
+    FimEnquanto
+
+    vetor[i + 1] <- elemento
+FimProcedimento
+
+Procedimento deletar_ocorrencias_elemento(vetor:vetor[1..n] de inteiro, elemento:inteiro)
+Var
+    i, j:inteiro
+
+    i <- 1
+    Enquanto i <= n faca
+        Se vetor[i] = elemento entao
+            Para j de i ate n - 1 faca
+                vetor[j] <- vetor[j + 1]
+            FimPara
+            n <- n - 1
+        Senao
+            i <- i + 1
+        FimSe
+    FimEnquanto
+FimProcedimento
+
+Procedimento deletar_ultima_ocorrencia_elemento(vetor:vetor[1..n] de inteiro, elemento:inteiro)
+Var
+    i:inteiro
+
+    i <- n
+    Enquanto i > 0 e vetor[i] <> elemento faca
+        i <- i - 1
+    FimEnquanto
+
+    Se i > 0 entao
+        Para j de i ate n - 1 faca
+            vetor[j] <- vetor[j + 1]
+        FimPara
+        n <- n - 1
+    FimSe
+FimProcedimento
+
+Função somar_dois_pontos(vetor:vetor[1..n] de inteiro):vetor[1..n] de inteiro
+Var
+    i:inteiro
+
+    Para i de 1 ate n faca
+        vetor[i] <- vetor[i] + 2
+    FimPara
+
+    Retorne vetor
+FimFunção
+
+Função contar_sequencias_repeticao(vetor:vetor[1..n] de inteiro):inteiro
+Var
+    sequencias, i, j:inteiro
+
+    sequencias <- 0
+    i <- 1
+    Enquanto i <= n faca
+        j <- i + 1
+        Enquanto j <= n e vetor[j] = vetor[i] faca
+            j <- j + 1
+        FimEnquanto
+        Se j > i + 1 entao
+            sequencias <- sequencias + 1
+        FimSe
+        i <- j
+    FimEnquanto
+
+    Retorne sequencias
+FimFunção
+
+Função maior_sequencia_elementos(vetor:vetor[1..n] de inteiro):inteiro
+Var
+    max_contagem, contagem_atual, i:inteiro
+
+    max_contagem <- 0
+    contagem_atual <- 1
+    Para i de 2 ate n faca
+        Se vetor[i] = vetor[i - 1] entao
+            contagem_atual <- contagem_atual + 1
+        Senao
+            Se contagem_atual > max_contagem entao
+                max_contagem <- contagem_atual
+            FimSe
+            contagem_atual <- 1
+        FimSe
+    FimPara
+
+    Se contagem_atual > max_contagem entao
+        max_contagem <- contagem_atual
+    FimSe
+
+    Retorne max_contagem
+FimFunção
+
+Função eh_palindromo(vetor:vetor[1..n] de caractere):logico
+Var
+    i, j:inteiro
+
+    i <- 1
+    j <- n
+
+    Enquanto i < j faca
+        Se vetor[i] <> vetor[j] entao
+            Retorne Falso
+        FimSe
+        i <- i + 1
+        j <- j - 1
+    FimEnquanto
+
+    Retorne Verdadeiro
+FimFunção
+
+Procedimento ordenar_vetor(vetor:vetor[1..n] de inteiro, crescente:logico)
+Var
+    i, j, temp:inteiro
+
+    Se crescente entao
+        Para i de 1 ate n - 1 faca
+            Para j de 1 ate n - i faca
+                Se vetor[j] > vetor[j + 1] entao
